@@ -69,7 +69,7 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
         # 只探索7次
         if explorationConfig.exploration_config.attack_number == AttackNumber.SEVEN:
             count = 0
-            while count < 99999999:
+            while count < 150:
                 if self.wait_until_appear(self.I_E_EXPLORATION_CLICK, wait_time=1):
                     self.click(self.I_E_EXPLORATION_CLICK)
                     count += 1
@@ -77,6 +77,8 @@ class ScriptTask(GeneralBattle, GameUi, SwitchSoul, ExplorationAssets):
                     self.battle_process()
                 if self.appear(self.I_EXPLORATION_TITLE):
                     self.open_expect_level()
+                if explorationConfig.exploration_config.current_exploration_times == count:
+                    break
 
             if self.wait_until_appear(self.I_RED_CLOSE, wait_time=2):
                 self.appear_then_click(self.I_RED_CLOSE)
